@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>copy & move</title>
+</head>
+<body>
+    <textarea name="copyTxt" cols="30" rows="5">Hello World</textarea> <br> <br>
+    <button class="moverBtn">Move Text</button>
+    <button class="copyBtn">Copy Text</button> <br> <br>
+    <textarea name="finalTxt" cols="30" rows="5"></textarea>
+     <div class="output"></div>
+    <script>
+      const copyTxt = document.querySelector("textarea[name=copyTxt]");
+      const moverBtn = document.querySelector(".moverBtn");
+      const copyBtn = document.querySelector(".copyBtn");
+      const finalTxt = document.querySelector("textarea[name=finalTxt]");
+      const output = document.querySelector(".output");
+
+      moverBtn.addEventListener("click", moveText);
+      copyBtn.addEventListener("click", copyText);
+      finalTxt.addEventListener("click", selAll);
+      copyTxt.addEventListener("click", selAll);
+
+      function selAll() {
+        this.select();
+      }  
+
+      function copyText(){
+        let temp = copyTxt.value;
+        copytoClipBoard(temp); 
+      } 
+
+      function copytoClipBoard(str) {
+        const textarea = document.createElement("textarea");
+        textarea.value = str;
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand("copy");
+        document.body.removeChild(textarea);
+        output.innerHTML = "<h3>Cpied Content</h3>" + textarea.value;
+            console.log(textarea);
+      }  
+
+      function moveText(){
+        let temp = copyTxt.value;
+        finalTxt.value = temp;
+      }
+    </script>
+</body>
+</html>            
+
+
